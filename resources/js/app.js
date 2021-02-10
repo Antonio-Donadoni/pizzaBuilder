@@ -7,10 +7,10 @@ import PortalVue from 'portal-vue';
 
 //Import FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCartPlus, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faCheck, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faCartPlus, faShoppingCart);
+library.add(faCartPlus, faShoppingCart, faCheck);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

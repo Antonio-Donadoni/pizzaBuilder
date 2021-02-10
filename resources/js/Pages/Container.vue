@@ -33,8 +33,16 @@
                     <img v-if="selectedIngredientsId.includes(13)" class="ingredients-layer" :src="'img/prosciutto_crudo.png'" alt="">
                 </div>
                 <div class="p-4 price-wrapper">
-                    <div  class="text-center mb-4">
-                        <strong>PREZZO: {{totalPrice}} €</strong> 
+                    <div style="background-color: crimson; font-weight:600; border-bottom-left-radius: 5px" class=" text-center absolute top-0 right-0 text-white p-1 "> LA TUA PIZZA</div>
+                    <div  class="text-center mb-4 mt-12">
+                        <span v-if="selectedSizeName != ''">{{selectedSizeName}}</span>
+                        <span v-if="selectedTypeName != ''">, {{selectedTypeName}}</span> 
+                        <span v-if="selectedIngredients.length > 0"> con
+                            <div v-for="ingredient in selectedIngredients" :key='ingredient.id'>{{ingredient.name }}</div>
+                        </span> 
+                        <br>
+                        <hr v-if="selectedSizeName != ''">    
+                        <div class="pt-2"><strong >PREZZO: {{totalPrice}} €</strong> </div>
                     </div>
                 
                     <div >
@@ -78,9 +86,12 @@
         </div>
         <div v-else>
         <cart       
-        :cart = "cart">
-
+        :cart = "cart"
+        :isOrderSent = "isOrderSent"
+        @showModal= "isOrderSent = true">
+        
         </cart>
+        <modal v-if="isOrderSent" @closeModal= "isOrderSent = false" />
         </div>
     </app-layout>
     
@@ -91,17 +102,19 @@
 
     import AppLayout from '@/Layouts/AppLayout';
     import cart from './Cart.vue';
-
+    import modal from './ModalOrderAccepted.vue';
 export default {
 
     components: {
         AppLayout,
-        cart
+        cart,
+        modal
     },
     data() {
         return {
 
             isShowingCart : false,
+            isOrderSent:false,
 
 
             ingredients: [],
@@ -218,6 +231,7 @@ export default {
         color: white;
         cursor: pointer;
         transition: 0.3s;
+        font-weight: 600;
     }
 
     .btn:hover {

@@ -38,7 +38,7 @@
                     <td colspan="3"></td>
                     <td class = "px-2 py-4 flex justify-end items-center whitespace-nowrap   font-medium">
                         <strong class="px-6 text-sm">PREZZO TOTALE : {{ cartTotal}} €</strong> 
-                        <a class="btn" @click="sendMessage()">COMPRA ORA</a>
+                        <a class="btn" @click="sendMessage(); $emit('showModal')">COMPRA ORA</a>
                     </td>
                 </tr>
 
@@ -51,7 +51,8 @@
 <script>
 export default {
     props : [
-        'cart'
+        'cart',
+        'isOrderSent'
     ],
     computed: {
         cartTotal: function() {
@@ -100,6 +101,7 @@ export default {
         float: right;
         cursor: pointer;
         transition: 0.3s;
+        font-weight: 600;
     }
     .btn:hover {
         
